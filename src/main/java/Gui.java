@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
@@ -23,7 +24,7 @@ public class Gui extends Application {
     private TextArea textArea;
     private TextField emailField;
     private TextField keywords;
-    private Text text;
+    private Label end;
     private BorderPane borderPane;
 
 
@@ -80,15 +81,26 @@ public class Gui extends Application {
         horizontal1.getChildren().addAll(analyze, emotion);
         vertical.getChildren().addAll(analyze, emotion);
 
-        //button to say done
+        //notification sign
         HBox horizontal2 = new HBox();
+        horizontal2.setAlignment(Pos.CENTER);
+        end = new Label();
+        end.setAlignment(Pos.CENTER);
+        end.setTextFill(Paint.valueOf("green"));
+        horizontal2.getChildren().add(end);
+        vertical.getChildren().add(horizontal2);
+
+
+        //button to say done
+        HBox horizontal3 = new HBox();
         button = new Button("Analyze and send result to email");
         button.setMaxWidth(300);
         button.setAlignment(Pos.CENTER);
-        horizontal2.setAlignment(Pos.CENTER);
-        horizontal2.setPadding(new Insets(20));
-        horizontal2.getChildren().add(button);
-        vertical.getChildren().add(horizontal2);
+        horizontal3.setAlignment(Pos.CENTER);
+        horizontal3.setPadding(new Insets(20));
+        horizontal3.getChildren().add(button);
+        vertical.getChildren().add(horizontal3);
+
 
         borderPane.setTop(vertical);
         return borderPane;
@@ -99,6 +111,10 @@ public class Gui extends Application {
             button.setDisable(true);
             process = new Process(new Text(textArea.getText()), new DestinationEmail(emailField.getText()),
                     new KeyPhrase(keywords.getText()));
+            textArea.setDisable(true);
+            emailField.setDisable(true);
+            keywords.setDisable(true);
+            end.setText("Thank you. An email with the result will be sent to you shortly.");
 
         });
     }
