@@ -1,13 +1,30 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class KeyPhrase {
     private String keywords;
-    private String[] keys;
+    private List<String> keys;
 
     public KeyPhrase(String keywords) {
         this.keywords = keywords;
-        this.keys = null;
+        this.keys = new ArrayList<>();
     }
 
-    public String getKeyphrase() {
-        return this.keywords;
+    public List<String> getKeys() {
+        keyphrases();
+        return keys;
     }
+
+    private void keyphrases() {
+        if (!keywords.contains(" ") && !keywords.contains(",")) {
+            keys.add(keywords);
+        } else {
+            String newKey = keywords.replaceAll(" ", "");
+            String[] keysSplitted = newKey.split(",");
+            Arrays.stream(keysSplitted).forEach(key -> keys.add(key));
+        }
+
+    }
+
 }
