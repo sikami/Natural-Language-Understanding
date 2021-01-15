@@ -10,7 +10,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 
-import javax.swing.*;
 
 /**
  * Gui class
@@ -98,9 +97,8 @@ public class Gui extends Application {
     private void runButton() {
         button.setOnAction(actionEvent -> {
             button.setDisable(true);
-            System.out.println(textArea.getText());
-            System.out.println(emailField.getText());
-            System.out.println(keywords.getText());
+            process = new Process(new Text(textArea.getText()), new DestinationEmail(emailField.getText()),
+                    new KeyPhrase(keywords.getText()));
 
         });
     }

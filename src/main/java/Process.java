@@ -5,9 +5,13 @@
  */
 public class Process {
     private Text texts;
+    private DestinationEmail destinationEmail;
+    private KeyPhrase keyPhrase;
 
-    public Process(Text texts) {
+    public Process(Text texts, DestinationEmail destinationEmail, KeyPhrase keyPhrase) {
         this.texts = texts;
+        this.destinationEmail = destinationEmail;
+        this.keyPhrase = keyPhrase;
     }
 
     public Text getTexts() {
