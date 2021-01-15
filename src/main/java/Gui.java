@@ -10,6 +10,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 
+import javax.swing.*;
+
 /**
  * Gui class
  * Class to launch the GUI.
@@ -69,7 +71,15 @@ public class Gui extends Application {
         horizontal1.getChildren().addAll(analyze, emotion);
         vertical.getChildren().addAll(analyze, emotion);
 
-
+        //button to say done
+        HBox horizontal2 = new HBox();
+        Button button = new Button("Analyze and send result to email");
+        button.setMaxWidth(300);
+        button.setAlignment(Pos.CENTER);
+        horizontal2.setAlignment(Pos.CENTER);
+        horizontal2.setPadding(new Insets(20));
+        horizontal2.getChildren().add(button);
+        vertical.getChildren().add(horizontal2);
 
 
 
