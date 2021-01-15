@@ -1,16 +1,21 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class File {
+public class FileInput {
     private String filePath;
     private Text textDocument;
 
-    public File(String filePath) {
+    public FileInput(String filePath) {
         this.filePath = filePath;
         this.textDocument = new Text("");
     }
 
     private void readFiles() {
 
+    }
+
+    public String getPath() {
+        return filePath;
     }
 }
