@@ -24,7 +24,6 @@ public class KeyPhrase {
             String[] keysSplitted = newKey.split(",");
             Arrays.stream(keysSplitted).forEach(key -> keys.add(key));
         }
-
     }
 
 }

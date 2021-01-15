@@ -19,7 +19,7 @@ public class TestKeyphrase {
     }
 
     @Test
-    public void testIfKeyphraseMoreThanOne() {
+    public void testIfKeyphraseMoreThanOneSeparatedByComma() {
         keyPhrase = new KeyPhrase("Hello, you");
         assertEquals(2,keyPhrase.getKeys().size());
     }
