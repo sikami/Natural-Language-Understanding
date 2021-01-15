@@ -1,7 +1,10 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * FileInput Class.
+ * Class to store the String file path where the user keep their text file in their local dir.
+ * @author listya
+ */
 public class FileInput {
     private String filePath;
     private Text textDocument;

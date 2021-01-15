@@ -1,3 +1,8 @@
+/**
+ * Text class.
+ * Class to store given text input from user.
+ * @author listya
+ */
 public class Text {
     private String text;
 
