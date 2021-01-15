@@ -22,6 +22,8 @@ public class Gui extends Application {
     private Process process;
     private Button button;
     private TextArea textArea;
+    private TextField emailField;
+    private TextField keywords;
     private Text text;
     private BorderPane borderPane;
 
@@ -56,15 +58,14 @@ public class Gui extends Application {
 
         //keyphrase
         Label keyphrase = new Label("Keyword to analyze:");
-        TextField keywords = new TextField();
+        keywords = new TextField();
 
         vertical.getChildren().addAll(keyphrase, keywords);
 
         //email address
 
         Label emailName = new Label("Your email address:");
-        TextField emailField = new TextField();
-        emailField.clear();
+        emailField = new TextField();
         vertical.getChildren().addAll(emailName, emailField);
 
         //option to analyze
@@ -98,6 +99,8 @@ public class Gui extends Application {
         button.setOnAction(actionEvent -> {
             button.setDisable(true);
             System.out.println(textArea.getText());
+            System.out.println(emailField.getText());
+            System.out.println(keywords.getText());
 
         });
     }
