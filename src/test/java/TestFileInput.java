@@ -1,10 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestFileInput {
@@ -20,4 +16,5 @@ public class TestFileInput {
     public void testIfFileExist() {
         assertTrue(file.isExist());
     }
+
 }
