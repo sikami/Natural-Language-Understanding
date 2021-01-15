@@ -18,4 +18,13 @@ public class FileInput {
     public String getPath() {
         return filePath;
     }
+
+
+    public boolean isExist() {
+        File newFile = new File(filePath);
+        if(newFile.exists()) {
+            return true;
+        }
+        return false;
+    }
 }

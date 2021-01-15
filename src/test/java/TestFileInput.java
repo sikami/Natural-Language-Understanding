@@ -18,7 +18,6 @@ public class TestFileInput {
 
     @Test
     public void testIfFileExist() {
-        File newFile = new File(file.getPath());
-        assertTrue(newFile.exists());
+        assertTrue(file.isExist());
     }
 }
