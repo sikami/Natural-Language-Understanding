@@ -19,8 +19,16 @@ import javax.swing.*;
  */
 public class Gui extends Application {
 
+    private Process process;
+    private Button button;
+    private TextArea textArea;
+    private Text text;
+    private BorderPane borderPane;
+
+
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(gui());
+        runButton();
         stage.setScene(scene);
         stage.show();
     }
@@ -43,13 +51,14 @@ public class Gui extends Application {
 
        //textfield
         Label text = new Label("Text Input:");
-        TextArea textArea = new TextArea();
+        textArea = new TextArea();
         vertical.getChildren().addAll(text, textArea);
 
         //keyphrase
         Label keyphrase = new Label("Keyword to analyze:");
-        TextField textField = new TextField();
-        vertical.getChildren().addAll(keyphrase, textField);
+        TextField keywords = new TextField();
+
+        vertical.getChildren().addAll(keyphrase, keywords);
 
         //email address
 
@@ -73,7 +82,7 @@ public class Gui extends Application {
 
         //button to say done
         HBox horizontal2 = new HBox();
-        Button button = new Button("Analyze and send result to email");
+        button = new Button("Analyze and send result to email");
         button.setMaxWidth(300);
         button.setAlignment(Pos.CENTER);
         horizontal2.setAlignment(Pos.CENTER);
@@ -84,4 +93,13 @@ public class Gui extends Application {
         borderPane.setTop(vertical);
         return borderPane;
     }
+
+    private void runButton() {
+        button.setOnAction(actionEvent -> {
+            button.setDisable(true);
+            System.out.println(textArea.getText());
+
+        });
+    }
+
 }
