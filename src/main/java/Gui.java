@@ -49,17 +49,26 @@ public class Gui extends Application {
         TextField textField = new TextField();
         vertical.getChildren().addAll(keyphrase, textField);
 
-        //things to check
+        //email address
+
+        Label emailName = new Label("Your email address:");
+        TextField emailField = new TextField();
+        emailField.clear();
+        vertical.getChildren().addAll(emailName, emailField);
+
+        //option to analyze
         HBox horizontal1 = new HBox();
         Label analyze = new Label("Analyze for:");
         RadioButton emotion = new RadioButton("Emotion");
 
         /**
          * default: emotion is selected.
+         * This can be changed later
          */
         emotion.setSelected(true);
         horizontal1.getChildren().addAll(analyze, emotion);
         vertical.getChildren().addAll(analyze, emotion);
+
 
 
 
