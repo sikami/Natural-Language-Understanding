@@ -81,8 +81,6 @@ public class Gui extends Application {
         horizontal2.getChildren().add(button);
         vertical.getChildren().add(horizontal2);
 
-
-
         borderPane.setTop(vertical);
         return borderPane;
     }
