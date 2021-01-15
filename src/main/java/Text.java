@@ -5,5 +5,8 @@ public class Text {
         this.text = text;
     }
 
+    public String getText() {
+        return text;
+    }
 }
 
