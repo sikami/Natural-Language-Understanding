@@ -21,7 +21,7 @@ public class Gui extends Application {
         Label title = new Label("Natural Language Understanding");
         title.setStyle("-fx-font-weight: bold");
         title.setFont(new Font("Arial", 16));
-        borderPane.setTop(title);S
+        borderPane.setTop(title);
         return borderPane;
     }
 }
