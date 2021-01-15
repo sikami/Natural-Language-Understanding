@@ -11,6 +11,11 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 
+/**
+ * Gui class
+ * Class to launch the GUI.
+ * @author listya
+ */
 public class Gui extends Application {
 
     public void start(Stage stage) throws Exception {
