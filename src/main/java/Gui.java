@@ -2,8 +2,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -40,9 +39,27 @@ public class Gui extends Application {
        vertical.getChildren().add(horizontal);
        vertical.getChildren().add(new Separator());
 
+       //textfield
+        Label text = new Label("Text Input:");
+        TextArea textArea = new TextArea();
+        vertical.getChildren().addAll(text, textArea);
 
+        //keyphrase
+        Label keyphrase = new Label("Keyword to analyze:");
+        TextField textField = new TextField();
+        vertical.getChildren().addAll(keyphrase, textField);
 
+        //things to check
+        HBox horizontal1 = new HBox();
+        Label analyze = new Label("Analyze for:");
+        RadioButton emotion = new RadioButton("Emotion");
 
+        /**
+         * default: emotion is selected.
+         */
+        emotion.setSelected(true);
+        horizontal1.getChildren().addAll(analyze, emotion);
+        vertical.getChildren().addAll(analyze, emotion);
 
 
 
