@@ -13,5 +13,9 @@ public class Text {
     public String getText() {
         return text;
     }
+
+    public String toString() {
+        return text;
+    }
 }
 
