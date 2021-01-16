@@ -21,6 +21,10 @@ public class PasswordReader {
         this.ibmUrl = "";
     }
 
+    public String getUrl() {
+        return url;
+    }
+
     private String readFile() {
         //open file
         //read file one line
@@ -37,4 +41,16 @@ public class PasswordReader {
         return null;
     }
 
+    public boolean isReadable() {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG));
+            String read = bufferedReader.readLine();
+            if (read.length() > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Config file is not readable");
+        }
+        return false;
+    }
 }
