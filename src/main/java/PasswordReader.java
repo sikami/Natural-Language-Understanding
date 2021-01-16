@@ -19,13 +19,14 @@ public class PasswordReader {
         this.gmailUsername = "";
         this.ibmApi = "";
         this.ibmUrl = "";
+        readFile();
     }
 
     public String getUrl() {
         return url;
     }
 
-    private String readFile() {
+    private void readFile() {
         //open file
         //read file one line
         // convert line into string[]
@@ -34,11 +35,27 @@ public class PasswordReader {
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG));
+            String input = "";
+            String[] key;
+
+            while((input = bufferedReader.readLine()) != null) {
+                key = input.split(" ");
+                if (input.contains("MAILBOX")) {
+                    mailboxApi = key[1];
+                } else if (input.contains("USERNAME")) {
+                    gmailUsername = key[1];
+                } else if (input.contains("PASSWORD")) {
+                    gmailPassword = key[1];
+                } else if (input.contains("IBM.APIKEY")) {
+                    ibmApi = key[1];
+                } else if (input.contains("IBM.URL")) {
+                    ibmUrl = key[1];
+                }
+            }
 
         } catch (Exception e) {
             System.out.println("Config file doesn't exist. Please create one.");
         }
-        return null;
     }
 
     public boolean isReadable() {
