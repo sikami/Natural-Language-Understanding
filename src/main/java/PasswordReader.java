@@ -25,6 +25,10 @@ public class PasswordReader {
         return pathName;
     }
 
+    public String getMailboxApi() {
+        return mailboxApi;
+    }
+
     private void readFile() {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG));
