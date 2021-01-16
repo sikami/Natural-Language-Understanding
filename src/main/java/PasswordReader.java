@@ -1,10 +1,9 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 
 public class PasswordReader {
 
-    private String url;
+    private String pathName;
     private String mailboxApi;
     private String gmailUsername;
     private String gmailPassword;
@@ -12,8 +11,8 @@ public class PasswordReader {
     private String ibmUrl;
     private final String CONFIG = "config";
 
-    public PasswordReader(String url) {
-        this.url = url;
+    public PasswordReader(String pathName) {
+        this.pathName = pathName;
         this.mailboxApi = "";
         this.gmailPassword = "";
         this.gmailUsername = "";
@@ -22,17 +21,19 @@ public class PasswordReader {
         readFile();
     }
 
-    public String getUrl() {
-        return url;
+    public String getPathName() {
+        return pathName;
+    }
+
+    public String getMailboxApi() {
+        return mailboxApi;
+    }
+
+    public String getGmailUsername() {
+        return gmailUsername;
     }
 
     private void readFile() {
-        //open file
-        //read file one line
-        // convert line into string[]
-        //split by " "
-        //if contains keyword then update constructor with string[1]
-
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG));
             String input = "";
@@ -44,7 +45,7 @@ public class PasswordReader {
                     mailboxApi = key[1];
                 } else if (input.contains("USERNAME")) {
                     gmailUsername = key[1];
-                } else if (input.contains("PASSWORD")) {
+                } else if (input.contains("PASS")) {
                     gmailPassword = key[1];
                 } else if (input.contains("IBM.APIKEY")) {
                     ibmApi = key[1];
@@ -70,4 +71,5 @@ public class PasswordReader {
         }
         return false;
     }
+
 }
