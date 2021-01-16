@@ -1,3 +1,5 @@
+package Result;
+
 public class Result {
     private String textTitle;
 
@@ -8,4 +10,5 @@ public class Result {
     public String getTextTitle() {
         return textTitle;
     }
+
 }
