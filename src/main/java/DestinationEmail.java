@@ -5,16 +5,20 @@
  */
 public class DestinationEmail {
     private String destinationEmail;
+    private PasswordReader passwordReader;
 
     public DestinationEmail(String destinationEmail) {
+        this.passwordReader = new PasswordReader("config");
         this.destinationEmail = destinationEmail;
     }
 
     //check if destination email is valid
-    public boolean checkIfEmailValid() {
-
-
-        return false;
+    private String url() {
+        String urlFirstPart = "https://apilayer.net/api/check?access_key=";
+        String urlSecondPart = passwordReader.getMailboxApi();
+        String urlThirdPart = "&email=" + destinationEmail;
+        String url = urlFirstPart + urlSecondPart + urlThirdPart;
+        return url;
     }
 
 
