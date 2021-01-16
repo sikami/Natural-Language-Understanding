@@ -1,10 +1,9 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 
 public class PasswordReader {
 
-    private String url;
+    private String pathName;
     private String mailboxApi;
     private String gmailUsername;
     private String gmailPassword;
@@ -12,8 +11,8 @@ public class PasswordReader {
     private String ibmUrl;
     private final String CONFIG = "config";
 
-    public PasswordReader(String url) {
-        this.url = url;
+    public PasswordReader(String pathName) {
+        this.pathName = pathName;
         this.mailboxApi = "";
         this.gmailPassword = "";
         this.gmailUsername = "";
@@ -22,8 +21,8 @@ public class PasswordReader {
         readFile();
     }
 
-    public String getUrl() {
-        return url;
+    public String getPathName() {
+        return pathName;
     }
 
     private void readFile() {
