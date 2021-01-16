@@ -29,6 +29,10 @@ public class PasswordReader {
         return mailboxApi;
     }
 
+    public String getGmailUsername() {
+        return gmailUsername;
+    }
+
     private void readFile() {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG));
