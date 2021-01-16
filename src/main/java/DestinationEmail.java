@@ -9,5 +9,9 @@ public class DestinationEmail {
     public DestinationEmail(String destinationEmail) {
         this.destinationEmail = destinationEmail;
     }
+
     //check if destination email is valid
+
+
+
 }
