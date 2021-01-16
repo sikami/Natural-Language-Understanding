@@ -27,12 +27,6 @@ public class PasswordReader {
     }
 
     private void readFile() {
-        //open file
-        //read file one line
-        // convert line into string[]
-        //split by " "
-        //if contains keyword then update constructor with string[1]
-
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG));
             String input = "";
@@ -44,7 +38,7 @@ public class PasswordReader {
                     mailboxApi = key[1];
                 } else if (input.contains("USERNAME")) {
                     gmailUsername = key[1];
-                } else if (input.contains("PASSWORD")) {
+                } else if (input.contains("PASS")) {
                     gmailPassword = key[1];
                 } else if (input.contains("IBM.APIKEY")) {
                     ibmApi = key[1];
@@ -70,4 +64,5 @@ public class PasswordReader {
         }
         return false;
     }
+
 }
