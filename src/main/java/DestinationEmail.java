@@ -11,7 +11,11 @@ public class DestinationEmail {
     }
 
     //check if destination email is valid
+    public boolean checkIfEmailValid() {
 
+
+        return false;
+    }
 
 
 }
