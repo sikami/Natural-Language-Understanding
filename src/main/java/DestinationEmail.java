@@ -21,6 +21,10 @@ public class DestinationEmail {
         this.destinationEmail = destinationEmail;
     }
 
+    public String getDestinationEmail() {
+        return destinationEmail;
+    }
+
     private String url() {
         String urlFirstPart = "https://apilayer.net/api/check?access_key=";
         String urlSecondPart = passwordReader.getMailboxApi();
