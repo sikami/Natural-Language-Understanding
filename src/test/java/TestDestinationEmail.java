@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestDestinationEmail {
     private DestinationEmail destinationEmail;
-    private PasswordReader passwordReader = new PasswordReader("config");
+    private PasswordReader passwordReader = new PasswordReader();
 
     @BeforeEach
     public void start() {

@@ -12,7 +12,7 @@ public class TestPasswordReader {
 
     @BeforeEach
     public void start() {
-        passwordReader = new PasswordReader("config");
+        passwordReader = new PasswordReader();
         file = new File(passwordReader.getPathName());
     }
 
