@@ -13,7 +13,18 @@ public class PasswordReader {
     private String ibmUrl;
     private final String CONFIG = "config";
 
+    public PasswordReader(String pathName) {
+        this.pathName = pathName;
+        this.mailboxApi = "";
+        this.gmailPassword = "";
+        this.gmailUsername = "";
+        this.ibmApi = "";
+        this.ibmUrl = "";
+        readFile();
+    }
+
     public PasswordReader() {
+        this.pathName = "";
         this.mailboxApi = "";
         this.gmailPassword = "";
         this.gmailUsername = "";
@@ -47,8 +58,14 @@ public class PasswordReader {
     }
 
     private void readFile() {
+        BufferedReader bufferedReader;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG));
+            if (pathName.isEmpty()) {
+                bufferedReader = new BufferedReader(new FileReader(CONFIG));
+            } else {
+                bufferedReader = new BufferedReader(new FileReader(pathName));
+            }
+
             String input = "";
             String[] key;
 
@@ -68,13 +85,19 @@ public class PasswordReader {
             }
 
         } catch (Exception e) {
-            System.out.println("Config file doesn't exist. Please create one.");
+            System.out.println("file doesn't exist. Please create one or check spelling.");
         }
     }
 
     public boolean isReadable() {
+        BufferedReader bufferedReader;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(CONFIG));
+            if (pathName.isEmpty()) {
+                bufferedReader = new BufferedReader(new FileReader(CONFIG));
+            } else {
+                bufferedReader = new BufferedReader(new FileReader(pathName));
+            }
+
             String read = bufferedReader.readLine();
             if (read.length() > 0) {
                 return true;
