@@ -23,6 +23,7 @@ public class Process {
         this.texts = texts;
         this.destinationEmail = destinationEmail;
         this.keyPhrase = keyPhrase;
+        this.passwordReader = new PasswordReader();
     }
 
     public Text getTexts() {
@@ -31,7 +32,7 @@ public class Process {
 
     public AnalysisResults connectToWatson() {
         IamAuthenticator authenticator = new IamAuthenticator(passwordReader.getIbmApi());
-        NaturalLanguageUnderstanding naturalLanguageUnderstanding = new NaturalLanguageUnderstanding("2020-18-01", authenticator);
+        NaturalLanguageUnderstanding naturalLanguageUnderstanding = new NaturalLanguageUnderstanding("2020-08-01", authenticator);
         naturalLanguageUnderstanding.setServiceUrl(passwordReader.getIbmUrl());
 
         String textArticle = this.texts.getText();
