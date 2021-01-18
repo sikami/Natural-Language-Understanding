@@ -17,7 +17,7 @@ public class DestinationEmail {
     private PasswordReader passwordReader;
 
     public DestinationEmail(String destinationEmail) {
-        this.passwordReader = new PasswordReader("config");
+        this.passwordReader = new PasswordReader();
         this.destinationEmail = destinationEmail;
     }
 

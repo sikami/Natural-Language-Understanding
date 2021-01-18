@@ -25,9 +25,8 @@ public class KeyPhrase {
         if (!keywords.contains(" ") && !keywords.contains(",")) {
             keys.add(keywords);
         } else {
-            String newKey = keywords.replaceAll(" ", "");
-            String[] keysSplitted = newKey.split(",");
-            Arrays.stream(keysSplitted).forEach(key -> keys.add(key));
+            String[] keysSplitted = keywords.split(",");
+            Arrays.stream(keysSplitted).forEach(key -> keys.add(key.trim()));
         }
     }
 

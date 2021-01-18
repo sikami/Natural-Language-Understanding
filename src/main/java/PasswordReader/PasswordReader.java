@@ -5,7 +5,7 @@ import java.io.FileReader;
 
 public class PasswordReader {
 
-    private String pathName;
+    private String pathName; //need to be added later
     private String mailboxApi;
     private String gmailUsername;
     private String gmailPassword;
@@ -13,8 +13,7 @@ public class PasswordReader {
     private String ibmUrl;
     private final String CONFIG = "config";
 
-    public PasswordReader(String pathName) {
-        this.pathName = pathName;
+    public PasswordReader() {
         this.mailboxApi = "";
         this.gmailPassword = "";
         this.gmailUsername = "";
