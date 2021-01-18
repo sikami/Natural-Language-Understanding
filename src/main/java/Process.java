@@ -29,7 +29,7 @@ public class Process {
         return texts;
     }
 
-    public void connectToWatson() {
+    public AnalysisResults connectToWatson() {
         IamAuthenticator authenticator = new IamAuthenticator(passwordReader.getIbmApi());
         NaturalLanguageUnderstanding naturalLanguageUnderstanding = new NaturalLanguageUnderstanding("2020-18-01", authenticator);
         naturalLanguageUnderstanding.setServiceUrl(passwordReader.getIbmUrl());
@@ -45,6 +45,6 @@ public class Process {
         AnalyzeOptions parameter = new AnalyzeOptions.Builder().text(textArticle).features(features).build();
 
         AnalysisResults response = naturalLanguageUnderstanding.analyze(parameter).execute().getResult();
-        System.out.println(response);
+        return response;
     }
 }
