@@ -1,11 +1,11 @@
 package Result;
 
 public class Emotion extends Result {
-    private Float sadness;
-    private Float joy;
-    private Float fear;
-    private Float disgust;
-    private Float anger;
+    private Double sadness;
+    private Double joy;
+    private Double fear;
+    private Double disgust;
+    private Double anger;
 
     public Emotion(String textTitle) {
         super(textTitle);
@@ -16,23 +16,23 @@ public class Emotion extends Result {
         this.anger = null;
     }
 
-    public void setSadness(Float sadness) {
+    public void setSadness(Double sadness) {
         this.sadness = sadness;
     }
 
-    public void setJoy(Float joy) {
+    public void setJoy(Double joy) {
         this.joy = joy;
     }
 
-    public void setFear(Float fear) {
+    public void setFear(Double fear) {
         this.fear = fear;
     }
 
-    public void setDisgust(Float disgust) {
+    public void setDisgust(Double disgust) {
         this.disgust = disgust;
     }
 
-    public void setAnger(Float anger) {
+    public void setAnger(Double anger) {
         this.anger = anger;
     }
 }
