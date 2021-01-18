@@ -21,7 +21,7 @@ public class TestProcess {
 
     }
     @Test
-    public void testProcessContainsEmailTextAnalyticKeyphrase() {
+    public void testProcessContainsResult() {
         AnalysisResults result = process.connectToWatson();
         assertTrue(result != null);
     }
