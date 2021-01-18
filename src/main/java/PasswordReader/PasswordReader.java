@@ -1,3 +1,5 @@
+package PasswordReader;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 
@@ -31,6 +33,18 @@ public class PasswordReader {
 
     public String getGmailUsername() {
         return gmailUsername;
+    }
+
+    public String getGmailPassword() {
+        return gmailPassword;
+    }
+
+    public String getIbmApi() {
+        return ibmApi;
+    }
+
+    public String getIbmUrl() {
+        return ibmUrl;
     }
 
     private void readFile() {
