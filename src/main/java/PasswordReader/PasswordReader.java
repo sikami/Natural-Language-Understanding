@@ -13,8 +13,7 @@ public class PasswordReader {
     private String ibmUrl;
     private final String CONFIG = "config";
 
-    public PasswordReader(String pathName) {
-        this.pathName = pathName;
+    public PasswordReader() {
         this.mailboxApi = "";
         this.gmailPassword = "";
         this.gmailUsername = "";
