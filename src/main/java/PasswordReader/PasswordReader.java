@@ -5,7 +5,7 @@ import java.io.FileReader;
 
 public class PasswordReader {
 
-    private String pathName;
+    private String pathName; //need to be added later
     private String mailboxApi;
     private String gmailUsername;
     private String gmailPassword;
