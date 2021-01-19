@@ -5,8 +5,13 @@ import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
 import com.ibm.watson.natural_language_understanding.v1.model.AnalyzeOptions;
 import com.ibm.watson.natural_language_understanding.v1.model.EmotionOptions;
 import com.ibm.watson.natural_language_understanding.v1.model.Features;
-
+import org.json.simple.parser.ParseException;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Process class.
@@ -47,5 +52,43 @@ public class Process {
 
         AnalysisResults response = naturalLanguageUnderstanding.analyze(parameter).execute().getResult();
         return response;
+    }
+
+    public boolean sendEmail() {
+        //set up properties for Gmail
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.port", "465");
+
+        Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(passwordReader.getGmailUsername(), passwordReader.getGmailPassword());
+            }
+        });
+
+        //compose email
+        try {
+            MimeMessage mimeMessage = new MimeMessage(session);
+            if (destinationEmail.isValid()) {
+                mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(destinationEmail.getDestinationEmail())) );
+                mimeMessage.setSubject("Your Natural Language Understanding result");
+                AnalysisResults results = connectToWatson();
+                mimeMessage.setText(results.getEmotion().toString());
+                Transport.send(mimeMessage);
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (javax.mail.internet.AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
