@@ -76,7 +76,7 @@ public class Process {
                 mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(destinationEmail.getDestinationEmail())) );
                 mimeMessage.setSubject("Your Natural Language Understanding result");
                 AnalysisResults results = connectToWatson();
-                mimeMessage.setText(results.getEmotion().toString());
+                mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + results.getEmotion().toString());
                 Transport.send(mimeMessage);
                 return true;
             }
