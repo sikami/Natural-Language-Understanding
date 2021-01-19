@@ -16,7 +16,7 @@ public class TestProcess {
     public void start() {
         keyPhrase = new KeyPhrase("orange");
         text = new Text("I love orange, orange is good for your health and is antiseptic.");
-        destinationEmail = new DestinationEmail("haha@test.com");
+        destinationEmail = new DestinationEmail("listya.tapp@gmail.com");
         process = new Process(text,destinationEmail,keyPhrase);
 
     }
@@ -24,5 +24,10 @@ public class TestProcess {
     public void testProcessContainsResult() {
         AnalysisResults result = process.connectToWatson();
         assertTrue(result != null);
+    }
+
+    @Test
+    public void testEmailCanBeSent() {
+        assertTrue(process.sendEmail());
     }
 }
