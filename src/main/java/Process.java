@@ -54,7 +54,7 @@ public class Process {
         return response;
     }
 
-    public void sendEmail() {
+    public boolean sendEmail() {
         //set up properties for Gmail
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -78,6 +78,7 @@ public class Process {
                 AnalysisResults results = connectToWatson();
                 mimeMessage.setText(results.getEmotion().toString());
                 Transport.send(mimeMessage);
+                return true;
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -88,5 +89,6 @@ public class Process {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+        return false;
     }
 }
