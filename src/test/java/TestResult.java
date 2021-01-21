@@ -28,13 +28,14 @@ public class TestResult {
         assertTrue(result.getEmotion("orange"));
 
     }
-//    @Test
-//    public void testResultContainJoyWithCorrectValue() {
-//        //"joy": 0.89565
-//        assertEquals(0.89565, result.getEmotion("joy"));
-//
-//
-//    }
+
+    @Test
+    public void testResultContainJoyWithCorrectValue() {
+        //"joy": 0.89565
+        assertEquals(0.89565, result.getEmotionScore("joy"));
+    }
+
+
 
 
 }
