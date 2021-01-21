@@ -3,6 +3,7 @@ import org.json.simple.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestProcess {
@@ -23,7 +24,7 @@ public class TestProcess {
     @Test
     public void testProcessContainsResult() {
         AnalysisResults result = process.connectToWatson();
-        assertTrue(result != null);
+        assertNotNull(result);
     }
 
     @Test
