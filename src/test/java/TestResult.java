@@ -19,14 +19,23 @@ public class TestResult {
 
     @Test
     public void testResultContain1TargetEmotion() {
-         assertEquals(1, result.getTargetContext());
+
+        assertEquals(1, result.getContainer().size());
+    }
+
+    @Test
+    public void testEmotionReturnsTextCorrectly() {
+        assertTrue(result.getEmotion("orange"));
+
     }
 
     @Test
     public void testResultContainJoyWithCorrectValue() {
         //"joy": 0.89565
-        assertEquals(0.89565, result.getEmotion("joy"));
+        assertEquals(0.89565, result.getEmotionScore("joy"));
     }
+
+
 
 
 }
