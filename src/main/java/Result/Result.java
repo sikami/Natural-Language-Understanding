@@ -71,4 +71,29 @@ public class Result {
         }
         return false;
     }
+
+
+    public double getEmotionScore(String name) {
+        double result = 0;
+        for (Emotion emotion : emotions) {
+            result = defineEmotion(emotion, name);
+        }
+        return result;
+    }
+
+    private double defineEmotion(Emotion emotion, String name) {
+        switch (name) {
+            case "joy":
+                return emotion.getJoy();
+            case "anger":
+                return emotion.getAnger();
+            case "fear":
+                return emotion.getFear();
+            case "sadness":
+                return emotion.getSadness();
+            case "disgust":
+                return emotion.getDisgust();
+        }
+        return 0;
+    }
 }
