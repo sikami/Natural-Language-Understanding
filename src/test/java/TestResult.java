@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestResult {
-    private Process process = new Process(new Text("Orange is lovely. It contains alot of vitamin C. Apple is good for you too. An apple a day keeps doctor away"), new
-            DestinationEmail("listya.tapp@gmail.com"), new KeyPhrase("orange, apple"));
+    private Process process = new Process(new Text("Orange is lovely. It contains alot of vitamin C."), new
+            DestinationEmail("listya.tapp@gmail.com"), new KeyPhrase("orange"));
     private AnalysisResults results = process.connectToWatson();
     private Result result = new Result(results);
 
@@ -18,7 +18,15 @@ public class TestResult {
     }
 
     @Test
-    public void testResultContain2TargetEmotion() {
-         assertEquals(2, result.getTargetContext());
+    public void testResultContain1TargetEmotion() {
+         assertEquals(1, result.getTargetContext());
     }
+
+    @Test
+    public void testResultContainJoyWithCorrectValue() {
+        //"joy": 0.89565
+        assertEquals(0.89565, result.getEmotion("joy"));
+    }
+
+
 }
