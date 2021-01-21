@@ -16,4 +16,28 @@ public class Emotion {
         this.disgust = disgust;
         this.anger = anger;
     }
+
+    public String getText() {
+        return text;
+    }
+
+    public double getSadness() {
+        return sadness;
+    }
+
+    public double getJoy() {
+        return joy;
+    }
+
+    public double getFear() {
+        return fear;
+    }
+
+    public double getDisgust() {
+        return disgust;
+    }
+
+    public double getAnger() {
+        return anger;
+    }
 }
