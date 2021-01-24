@@ -111,6 +111,8 @@ public class Gui extends Application {
             button.setDisable(true);
             process = new Process(new Text(textArea.getText()), new DestinationEmail(emailField.getText()),
                     new KeyPhrase(keywords.getText()));
+
+            // send connect to watson and send email to
             textArea.setDisable(true);
             emailField.setDisable(true);
             keywords.setDisable(true);

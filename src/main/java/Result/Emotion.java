@@ -8,6 +8,7 @@ public class Emotion {
     private double disgust;
     private double anger;
 
+
     public Emotion(String text, double sadness, double joy, double fear, double disgust, double anger) {
         this.text = text;
         this.sadness = sadness;
