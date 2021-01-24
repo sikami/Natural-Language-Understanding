@@ -41,4 +41,20 @@ public class Emotion {
     public double getAnger() {
         return anger;
     }
+
+    public boolean equals(Object compared) {
+        if (this == compared) {
+            return true;
+        }
+
+        if (!(compared instanceof Emotion)) {
+            return false;
+        }
+
+        Emotion emotion = (Emotion) compared;
+        if (this.text.equals(emotion.text)) {
+            return true;
+        }
+        return false;
+    }
 }
