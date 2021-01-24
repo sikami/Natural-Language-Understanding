@@ -42,4 +42,10 @@ public class Emotion {
         return anger;
     }
 
+    public String toString() {
+        return "Emotions to be collected from the keyword: " + this.text +
+                "\n\nJoy: " + joy + "\nSadness: " + sadness + "\nFear: " + fear
+                + "\nDisgust: " + disgust + "\nAnger: " + anger +"\n\n";
+    }
+
 }
