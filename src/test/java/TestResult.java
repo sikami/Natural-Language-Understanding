@@ -1,5 +1,16 @@
 import Result.Result;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
+import com.sun.source.tree.AssertTree;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,32 +32,13 @@ public class TestResult {
 
     @Test
     public void testResultContain1TargetEmotion() {
-
         assertEquals(1, result.getEmotion().size());
     }
 
-//    @Test
-//    public void testEmotionReturnsTextCorrectly() {
-//        assertTrue(result.getEmotion("orange"));
-//
-//    }
-//
-//    @Test
-//    public void testResultContainJoyWithCorrectValue() {
-//        //"joy": 0.89565
-//        assertEquals(0.89565, result.getEmotionScore("joy"));
-//    }
-//
-//    @Test
-//    public void testResultContainsTwoEmotions() {
-//        process = new Process(new Text("Orange is lovely. It contains alot of vitamin C. Apple is good as well, it has many good stuff."), new
-//                DestinationEmail("listya.tapp@gmail.com"), new KeyPhrase("orange, apple"));
-//        results = process.connectToWatson();
-//       // result = new Result(results);
-//
-//        System.out.println(results.getEmotion().getTargets());
-//    }
-
+    @Test
+    public void testResultContainJoyCorrectly() {
+        assertEquals(0.89565, result.getEmotion("orange", "joy"));
+    }
 
 
 
