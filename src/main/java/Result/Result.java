@@ -63,25 +63,6 @@ public class Result {
         return result;
     }
 
-
-//    public boolean getEmotion(String name) {
-//        for (Emotion emotion : emotions) {
-//            if (emotion.getText().equals(name)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//
-//    public double getEmotionScore(String name) {
-//        double result = 0;
-//        for (Emotion emotion : emotions) {
-//            result = defineEmotion(emotion, name);
-//        }
-//        return result;
-//    }
-//
     private double defineEmotion(Emotion emotion, String name) {
         switch (name) {
             case "joy":
