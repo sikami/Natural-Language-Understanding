@@ -1,4 +1,5 @@
 import PasswordReader.PasswordReader;
+import Result.Result;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.natural_language_understanding.v1.NaturalLanguageUnderstanding;
 import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
@@ -76,7 +77,9 @@ public class Process {
                 mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(destinationEmail.getDestinationEmail())) );
                 mimeMessage.setSubject("Your Natural Language Understanding result");
                 AnalysisResults results = connectToWatson();
-                mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + results.getEmotion().toString());
+
+                Result result = new Result(results);
+                mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + result.printEmotion());
                 Transport.send(mimeMessage);
                 return true;
             }

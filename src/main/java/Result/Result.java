@@ -78,4 +78,12 @@ public class Result {
         }
         return 0;
     }
+
+    public String printEmotion() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        emotions.forEach(stringBuilder::append);
+
+        return stringBuilder.toString();
+    }
 }
