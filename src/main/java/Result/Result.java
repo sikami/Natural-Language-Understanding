@@ -53,6 +53,16 @@ public class Result {
         return this.emotions;
     }
 
+    public double getEmotion(String text, String emotionToSearch) {
+        double result = 0;
+        for (Emotion emotion : emotions) {
+            if (emotion.getText().contains(text)) {
+                result = defineEmotion(emotion, emotionToSearch);
+            }
+        }
+        return result;
+    }
+
 
 //    public boolean getEmotion(String name) {
 //        for (Emotion emotion : emotions) {
@@ -72,19 +82,19 @@ public class Result {
 //        return result;
 //    }
 //
-//    private double defineEmotion(Emotion emotion, String name) {
-//        switch (name) {
-//            case "joy":
-//                return emotion.getJoy();
-//            case "anger":
-//                return emotion.getAnger();
-//            case "fear":
-//                return emotion.getFear();
-//            case "sadness":
-//                return emotion.getSadness();
-//            case "disgust":
-//                return emotion.getDisgust();
-//        }
-//        return 0;
-//    }
+    private double defineEmotion(Emotion emotion, String name) {
+        switch (name) {
+            case "joy":
+                return emotion.getJoy();
+            case "anger":
+                return emotion.getAnger();
+            case "fear":
+                return emotion.getFear();
+            case "sadness":
+                return emotion.getSadness();
+            case "disgust":
+                return emotion.getDisgust();
+        }
+        return 0;
+    }
 }
