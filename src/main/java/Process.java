@@ -8,6 +8,7 @@ import com.ibm.watson.natural_language_understanding.v1.model.EmotionOptions;
 import com.ibm.watson.natural_language_understanding.v1.model.Features;
 import org.json.simple.parser.ParseException;
 import javax.mail.*;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
@@ -83,13 +84,7 @@ public class Process {
                 Transport.send(mimeMessage);
                 return true;
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (javax.mail.internet.AddressException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
+        } catch (ParseException | IOException | MessagingException e) {
             e.printStackTrace();
         }
         return false;
