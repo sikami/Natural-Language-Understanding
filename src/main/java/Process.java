@@ -1,4 +1,5 @@
 import PasswordReader.PasswordReader;
+import Result.Result;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.natural_language_understanding.v1.NaturalLanguageUnderstanding;
 import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
@@ -7,6 +8,7 @@ import com.ibm.watson.natural_language_understanding.v1.model.EmotionOptions;
 import com.ibm.watson.natural_language_understanding.v1.model.Features;
 import org.json.simple.parser.ParseException;
 import javax.mail.*;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
@@ -76,17 +78,13 @@ public class Process {
                 mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(destinationEmail.getDestinationEmail())) );
                 mimeMessage.setSubject("Your Natural Language Understanding result");
                 AnalysisResults results = connectToWatson();
-                mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + results.getEmotion().toString());
+
+                Result result = new Result(results);
+                mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + result.printEmotion());
                 Transport.send(mimeMessage);
                 return true;
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (javax.mail.internet.AddressException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
+        } catch (ParseException | IOException | MessagingException e) {
             e.printStackTrace();
         }
         return false;

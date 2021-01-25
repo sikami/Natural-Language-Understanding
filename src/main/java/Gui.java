@@ -54,6 +54,7 @@ public class Gui extends Application {
        //textfield
         Label text = new Label("Text Input:");
         textArea = new TextArea();
+        textArea.setWrapText(true);
         vertical.getChildren().addAll(text, textArea);
 
         //keyphrase
@@ -113,6 +114,7 @@ public class Gui extends Application {
                     new KeyPhrase(keywords.getText()));
 
             // send connect to watson and send email to
+            process.sendEmail();
             textArea.setDisable(true);
             emailField.setDisable(true);
             keywords.setDisable(true);
