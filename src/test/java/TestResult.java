@@ -40,6 +40,4 @@ public class TestResult {
         assertEquals(0.89565, result.getEmotion("orange", "joy"));
     }
 
-
-
 }

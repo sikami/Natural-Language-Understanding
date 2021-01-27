@@ -14,6 +14,10 @@ public class Text {
         return text;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public String toString() {
         return text;
     }
