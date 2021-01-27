@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestFileInput {
@@ -17,4 +18,8 @@ public class TestFileInput {
         assertTrue(file.isExist());
     }
 
+    @Test
+    public void testIfFileCanBeParsed() {
+        assertEquals(96, file.getText().length());
+    }
 }
