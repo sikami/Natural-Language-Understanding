@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -109,18 +110,48 @@ public class Gui extends Application {
 
     private void runButton() {
         button.setOnAction(actionEvent -> {
-            button.setDisable(true);
-            process = new Process(new Text(textArea.getText()), new DestinationEmail(emailField.getText()),
-                    new KeyPhrase(keywords.getText()));
+            //if test empty then reinput
+            if(checkIfTextFieldsAreEmpty()) {
 
-            // send connect to watson and send email to
-            process.sendEmail();
-            textArea.setDisable(true);
-            emailField.setDisable(true);
-            keywords.setDisable(true);
-            end.setText("Thank you. An email with the result will be sent to you shortly.");
+            } else {
+                button.setDisable(true);
+                process = new Process(new Text(textArea.getText()), new DestinationEmail(emailField.getText()),
+                        new KeyPhrase(keywords.getText()));
+
+                // send connect to watson and send email to
+                process.sendEmail();
+                textArea.setDisable(true);
+                emailField.setDisable(true);
+                keywords.setDisable(true);
+                end.setText("Thank you. An email with the result will be sent to you shortly.");
+            }
+
 
         });
+    }
+
+    private boolean checkIfTextFieldsAreEmpty() {
+        if (textArea.getText().isEmpty() && emailField.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!") &&
+        emailField.getText().equals("This field cannot be empty!")) {
+            warning(textArea);
+            warning(emailField);
+            return true;
+        } else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
+            warning(emailField);
+            return true;
+        } else if (textArea.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!")) {
+            warning(textArea);
+            return true;
+        }
+        return false;
+    }
+
+    private void warning(Object d) {
+        if (d instanceof TextArea) {
+            textArea.setText("This field cannot be empty!");
+        } else if (d instanceof TextField) {
+            emailField.setText("This field cannot be empty!");
+        }
     }
 
 }
