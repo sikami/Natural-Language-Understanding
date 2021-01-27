@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
@@ -9,8 +11,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
+
+import java.io.File;
 
 
 /**
@@ -22,6 +27,8 @@ public class Gui extends Application {
 
     private Process process;
     private Button button;
+    private Button fileButton;
+    private TextField pathName;
     private TextArea textArea;
     private TextField emailField;
     private TextField keywords;
@@ -52,11 +59,16 @@ public class Gui extends Application {
        vertical.getChildren().add(horizontal);
        vertical.getChildren().add(new Separator());
 
-       //textfield
+       //textfield & Button added to choose for text file
+        HBox horizontal1 = new HBox();
+        horizontal1.setSpacing(10);
+        fileButton = new Button("Choose text file");
+        pathName = new TextField();
+        horizontal1.getChildren().addAll(fileButton, pathName);
         Label text = new Label("Text Input:");
         textArea = new TextArea();
         textArea.setWrapText(true);
-        vertical.getChildren().addAll(text, textArea);
+        vertical.getChildren().addAll(horizontal1, text, textArea);
 
         //keyphrase
         Label keyphrase = new Label("Keyword(s) to analyze:");
@@ -71,7 +83,7 @@ public class Gui extends Application {
         vertical.getChildren().addAll(emailName, emailField);
 
         //option to analyze
-        HBox horizontal1 = new HBox();
+
         Label analyze = new Label("Analyze for:");
         RadioButton emotion = new RadioButton("Emotion");
 
@@ -80,7 +92,6 @@ public class Gui extends Application {
          * This can be changed later
          */
         emotion.setSelected(true);
-        horizontal1.getChildren().addAll(analyze, emotion);
         vertical.getChildren().addAll(analyze, emotion);
 
         //notification sign
