@@ -59,7 +59,7 @@ public class Gui extends Application {
         vertical.getChildren().addAll(text, textArea);
 
         //keyphrase
-        Label keyphrase = new Label("Keyword to analyze:");
+        Label keyphrase = new Label("Keyword(s) to analyze:");
         keywords = new TextField();
 
         vertical.getChildren().addAll(keyphrase, keywords);
@@ -131,10 +131,11 @@ public class Gui extends Application {
     }
 
     private boolean checkIfTextFieldsAreEmpty() {
-        if (textArea.getText().isEmpty() && emailField.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!") &&
-        emailField.getText().equals("This field cannot be empty!")) {
+        if (textArea.getText().isEmpty() && emailField.getText().isEmpty() && keywords.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!") &&
+        emailField.getText().equals("This field cannot be empty!") && keywords.getText().equals("This field cannot be empty!")) {
             warning(textArea);
             warning(emailField);
+            warning(keywords);
             return true;
         } else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
             warning(emailField);
@@ -142,15 +143,20 @@ public class Gui extends Application {
         } else if (textArea.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!")) {
             warning(textArea);
             return true;
+        } else if (keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
+            warning(keywords);
+            return true;
         }
         return false;
     }
 
     private void warning(Object d) {
         if (d instanceof TextArea) {
-            textArea.setText("This field cannot be empty!");
+            TextArea changed = (TextArea) d;
+            changed.setText("This field cannot be empty!");
         } else if (d instanceof TextField) {
-            emailField.setText("This field cannot be empty!");
+            TextField changed = (TextField) d;
+            changed.setText("This field cannot be empty!");
         }
     }
 
