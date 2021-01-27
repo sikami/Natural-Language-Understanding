@@ -11,11 +11,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.FontWeight;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 
 import java.io.File;
+import java.nio.file.Path;
 
 
 /**
@@ -26,9 +28,11 @@ import java.io.File;
 public class Gui extends Application {
 
     private Process process;
+    private Text textInput;
     private Button button;
     private Button fileButton;
     private TextField pathName;
+    private String pathNameLocation;
     private TextArea textArea;
     private TextField emailField;
     private TextField keywords;
@@ -38,6 +42,7 @@ public class Gui extends Application {
 
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(gui());
+        runDirChooser(stage);
         runButton();
         stage.setScene(scene);
         stage.show();
@@ -119,14 +124,43 @@ public class Gui extends Application {
         return borderPane;
     }
 
+    private void runDirChooser(Stage stage) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+
+        fileButton.setOnAction(actionEvent -> {
+
+            File selected = fileChooser.showOpenDialog(stage);
+            //update pathNameLocation
+            try {
+                pathNameLocation = selected.getAbsolutePath();
+                if (pathNameLocation.isEmpty() || pathName.getText().isEmpty()) {
+                    textArea.setDisable(false);
+                } else {
+                    textArea.setDisable(true);
+                }
+                //update the gui to show pathname in the textfield
+                pathName.setText(pathNameLocation);
+                //read the file and input to Text
+                FileInput fileInput = new FileInput(pathNameLocation);
+                textInput = new Text(fileInput.getText());
+            } catch (Exception e) {
+
+            }
+
+        });
+    }
+
     private void runButton() {
         button.setOnAction(actionEvent -> {
             //if test empty then reinput
-            if(checkIfTextFieldsAreEmpty()) {
+            if (pathName.getText().isEmpty()) {
+                textInput = new Text(textArea.getText());
+            }
 
-            } else {
+            if(!checkIfTextFieldsAreEmpty()) {
                 button.setDisable(true);
-                process = new Process(new Text(textArea.getText()), new DestinationEmail(emailField.getText()),
+                process = new Process(textInput, new DestinationEmail(emailField.getText()),
                         new KeyPhrase(keywords.getText()));
 
                 // send connect to watson and send email to
@@ -136,27 +170,45 @@ public class Gui extends Application {
                 keywords.setDisable(true);
                 end.setText("Thank you. An email with the result will be sent to you shortly.");
             }
-
-
         });
     }
 
     private boolean checkIfTextFieldsAreEmpty() {
-        if (textArea.getText().isEmpty() && emailField.getText().isEmpty() && keywords.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!") &&
-        emailField.getText().equals("This field cannot be empty!") && keywords.getText().equals("This field cannot be empty!")) {
-            warning(textArea);
-            warning(emailField);
-            warning(keywords);
-            return true;
-        } else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
-            warning(emailField);
-            return true;
-        } else if (textArea.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!")) {
-            warning(textArea);
-            return true;
-        } else if (keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
-            warning(keywords);
-            return true;
+        //check if pathName is empty, when its empty check text area etc
+        if (pathName.getText().isEmpty()) {
+            textArea.setDisable(false);
+            if (textArea.getText().isEmpty() && emailField.getText().isEmpty() && keywords.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!") &&
+                    emailField.getText().equals("This field cannot be empty!") && keywords.getText().equals("This field cannot be empty!")) {
+                warning(textArea);
+                warning(emailField);
+                warning(keywords);
+                return true;
+            } else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
+                warning(emailField);
+                return true;
+            } else if (textArea.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!")) {
+                warning(textArea);
+                return true;
+            } else if (keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
+                warning(keywords);
+                return true;
+            }
+        } else {
+            //if pathName is not empty, then textArea set disabled, then check if keywords is empty and email address is empty
+            textArea.setDisable(true);
+            textArea.setText("");
+            if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!") && keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
+                warning(emailField);
+                warning(keywords);
+                return true;
+            }
+            else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
+                warning(emailField);
+                return true;
+            } else if (keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
+                warning(keywords);
+                return true;
+            }
         }
         return false;
     }
