@@ -40,9 +40,9 @@ public class Gui extends Application {
     private BorderPane borderPane;
 
 
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         Scene scene = new Scene(gui());
-        runDirChooser(stage);
+        runFileChooser(stage);
         runButton();
         stage.setScene(scene);
         stage.show();
@@ -67,13 +67,14 @@ public class Gui extends Application {
        //textfield & Button added to choose for text file
         HBox horizontal1 = new HBox();
         horizontal1.setSpacing(10);
+        Label option = new Label("Note: You can select text file from your system or manually input text in the text area below.");
         fileButton = new Button("Choose text file");
         pathName = new TextField();
         horizontal1.getChildren().addAll(fileButton, pathName);
         Label text = new Label("Text Input:");
         textArea = new TextArea();
         textArea.setWrapText(true);
-        vertical.getChildren().addAll(horizontal1, text, textArea);
+        vertical.getChildren().addAll(option, horizontal1, text, textArea);
 
         //keyphrase
         Label keyphrase = new Label("Keyword(s) to analyze:");
@@ -124,7 +125,7 @@ public class Gui extends Application {
         return borderPane;
     }
 
-    private void runDirChooser(Stage stage) {
+    private void runFileChooser(Stage stage) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
 
@@ -147,7 +148,6 @@ public class Gui extends Application {
             } catch (Exception e) {
 
             }
-
         });
     }
 
