@@ -89,16 +89,31 @@ public class Gui extends Application {
         vertical.getChildren().addAll(emailName, emailField);
 
         //option to analyze
-
+        HBox boxAnalysisOption = new HBox();
+        boxAnalysisOption.setSpacing(10);
+        boxAnalysisOption.setPadding(new Insets(10));
         Label analyze = new Label("Analyze for:");
+        ToggleGroup toggleGroupAnalysis = new ToggleGroup();
+
         RadioButton emotion = new RadioButton("Emotion");
+        RadioButton syntax = new RadioButton("Syntax");
+        emotion.setToggleGroup(toggleGroupAnalysis);
+        syntax.setToggleGroup(toggleGroupAnalysis);
+
+        syntax.setOnAction(obj -> {
+            keywords.setDisable(true);
+        });
+        emotion.setOnAction(obj -> {
+            keywords.setDisable(false);
+        });
+        boxAnalysisOption.getChildren().addAll(emotion, syntax);
 
         /**
          * default: emotion is selected.
          * This can be changed later
          */
         emotion.setSelected(true);
-        vertical.getChildren().addAll(analyze, emotion);
+        vertical.getChildren().addAll(analyze, boxAnalysisOption);
 
         //notification sign
         HBox horizontal2 = new HBox();
