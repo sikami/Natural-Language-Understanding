@@ -38,6 +38,7 @@ public class Gui extends Application {
     private TextField keywords;
     private Label end;
     private BorderPane borderPane;
+    private ToggleGroup toggleGroup;
 
 
     public void start(Stage stage) {
@@ -93,12 +94,12 @@ public class Gui extends Application {
         boxAnalysisOption.setSpacing(10);
         boxAnalysisOption.setPadding(new Insets(10));
         Label analyze = new Label("Analyze for:");
-        ToggleGroup toggleGroupAnalysis = new ToggleGroup();
+        toggleGroup = new ToggleGroup();
 
         RadioButton emotion = new RadioButton("Emotion");
         RadioButton syntax = new RadioButton("Syntax");
-        emotion.setToggleGroup(toggleGroupAnalysis);
-        syntax.setToggleGroup(toggleGroupAnalysis);
+        emotion.setToggleGroup(toggleGroup);
+        syntax.setToggleGroup(toggleGroup);
 
         syntax.setOnAction(obj -> {
             keywords.setDisable(true);
@@ -177,6 +178,9 @@ public class Gui extends Application {
                 button.setDisable(true);
                 process = new Process(textInput, new DestinationEmail(emailField.getText()),
                         new KeyPhrase(keywords.getText()));
+
+                String option = toggleGroup.getSelectedToggle().toString().toLowerCase();
+                process.setAnalyzeOption(option);
 
                 // send connect to watson and send email to
                 process.sendEmail();
