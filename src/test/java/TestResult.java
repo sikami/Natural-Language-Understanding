@@ -27,17 +27,26 @@ public class TestResult {
 
     @Test
     public void testResultContainsAnalysisResults() {
+        process.setAnalyzeOption("emotion");
         assertTrue(!result.getResult().toString().isEmpty());
     }
 
     @Test
     public void testResultContain1TargetEmotion() {
+        process.setAnalyzeOption("emotion");
         assertEquals(1, result.getEmotion().size());
     }
 
     @Test
     public void testResultContainJoyCorrectly() {
+        process.setAnalyzeOption("emotion");
         assertEquals(0.89565, result.getEmotion("orange", "joy"));
+    }
+
+    @Test
+    public void testResultContain9Result() {
+        process.setAnalyzeOption("syntax");
+        assertEquals(9, result.getSyntax().size());
     }
 
 }
