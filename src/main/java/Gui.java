@@ -99,6 +99,13 @@ public class Gui extends Application {
         RadioButton syntax = new RadioButton("Syntax");
         emotion.setToggleGroup(toggleGroupAnalysis);
         syntax.setToggleGroup(toggleGroupAnalysis);
+
+        syntax.setOnAction(obj -> {
+            keywords.setDisable(true);
+        });
+        emotion.setOnAction(obj -> {
+            keywords.setDisable(false);
+        });
         boxAnalysisOption.getChildren().addAll(emotion, syntax);
 
         /**
