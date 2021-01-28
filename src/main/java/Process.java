@@ -25,12 +25,22 @@ public class Process {
     private DestinationEmail destinationEmail;
     private KeyPhrase keyPhrase;
     private PasswordReader passwordReader;
+    private String analyzeOption;
 
     public Process(Text texts, DestinationEmail destinationEmail, KeyPhrase keyPhrase) {
         this.texts = texts;
         this.destinationEmail = destinationEmail;
         this.keyPhrase = keyPhrase;
         this.passwordReader = new PasswordReader();
+        this.analyzeOption = "";
+    }
+
+    public void setAnalyzeOption(String analyzeOption) {
+        this.analyzeOption = analyzeOption;
+    }
+
+    public String getAnalyzeOption() {
+        return analyzeOption;
     }
 
     public Text getTexts() {

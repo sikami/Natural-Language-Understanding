@@ -31,4 +31,10 @@ public class TestProcess {
     public void testEmailCanBeSent() {
         assertTrue(process.sendEmail());
     }
+
+    @Test
+    public void testProcessGivesAnalyzeOption() {
+        process.setAnalyzeOption("emotion");
+        assertTrue(process.getAnalyzeOption().equals("emotion"));
+    }
 }
