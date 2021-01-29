@@ -2,6 +2,7 @@ package Result;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
 import org.json.JSONArray;
@@ -20,16 +21,18 @@ import java.util.stream.Collectors;
 public class Result {
     private AnalysisResults results;
     private List<Emotion> emotions;
+    private List<Syntax> syntaxes;
 
     public Result(AnalysisResults results) {
         this.results = results;
         this.emotions = new ArrayList<>();
-        fillUpEmotionsWithResult();
+        this.syntaxes = new ArrayList<>();
     }
 
     public AnalysisResults getResult() {
         return this.results;
     }
+
 
     private void fillUpEmotionsWithResult() {
         Double joy, fear, sadness, disgust, anger;
@@ -49,11 +52,33 @@ public class Result {
         }
     }
 
-    public List<Emotion> getEmotion() {
-        return this.emotions;
+    public List<Syntax> getSyntax() {
+        fillUpSyntaxesWithResult();
+        return syntaxes;
+    }
+
+    private void fillUpSyntaxesWithResult() {
+        String word, partOfSpeech, lemma = "";
+        JsonObject jsonObject = new Gson().fromJson(results.toString(), JsonObject.class);
+        JsonObject json = (JsonObject) jsonObject.get("syntax");
+        JsonElement jsonElement = json.get("tokens");
+        JsonArray jsonA = jsonElement.getAsJsonArray();
+        for (JsonElement jsonElements : jsonA) {
+            word = jsonElements.getAsJsonObject().get("text").toString();
+            partOfSpeech = jsonElements.getAsJsonObject().get("part_of_speech").toString();
+            lemma = jsonElements.getAsJsonObject().get("lemma").toString();
+            syntaxes.add(new Syntax(word,partOfSpeech,lemma));
+        }
+    }
+    
+    
+    public int getEmotion() {
+        fillUpEmotionsWithResult();
+        return emotions.size();
     }
 
     public double getEmotion(String text, String emotionToSearch) {
+        fillUpEmotionsWithResult();
         double result = 0;
         for (Emotion emotion : emotions) {
             if (emotion.getText().contains(text)) {
@@ -86,4 +111,6 @@ public class Result {
 
         return stringBuilder.toString();
     }
+
+    
 }
