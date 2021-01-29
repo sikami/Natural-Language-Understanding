@@ -2,10 +2,7 @@ import PasswordReader.PasswordReader;
 import Result.Result;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.natural_language_understanding.v1.NaturalLanguageUnderstanding;
-import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
-import com.ibm.watson.natural_language_understanding.v1.model.AnalyzeOptions;
-import com.ibm.watson.natural_language_understanding.v1.model.EmotionOptions;
-import com.ibm.watson.natural_language_understanding.v1.model.Features;
+import com.ibm.watson.natural_language_understanding.v1.model.*;
 import org.json.simple.parser.ParseException;
 import javax.mail.*;
 import javax.mail.internet.AddressException;
@@ -25,12 +22,22 @@ public class Process {
     private DestinationEmail destinationEmail;
     private KeyPhrase keyPhrase;
     private PasswordReader passwordReader;
+    private String analyzeOption;
 
     public Process(Text texts, DestinationEmail destinationEmail, KeyPhrase keyPhrase) {
         this.texts = texts;
         this.destinationEmail = destinationEmail;
         this.keyPhrase = keyPhrase;
         this.passwordReader = new PasswordReader();
+        this.analyzeOption = "";
+    }
+
+    public void setAnalyzeOption(String analyzeOption) {
+        this.analyzeOption = analyzeOption;
+    }
+
+    public String getAnalyzeOption() {
+        return analyzeOption;
     }
 
     public Text getTexts() {
@@ -41,18 +48,31 @@ public class Process {
         IamAuthenticator authenticator = new IamAuthenticator(passwordReader.getIbmApi());
         NaturalLanguageUnderstanding naturalLanguageUnderstanding = new NaturalLanguageUnderstanding("2020-08-01", authenticator);
         naturalLanguageUnderstanding.setServiceUrl(passwordReader.getIbmUrl());
-
+        AnalysisResults response = null;
+        Features features;
         String textArticle = this.texts.getText();
 
-        List<String> targets = keyPhrase.getKeys();
+        //if emotion then do this
+        if (analyzeOption.equals("emotion")) {
+            List<String> targets = keyPhrase.getKeys();
 
-        EmotionOptions emotionOptions = new EmotionOptions.Builder().targets(targets).build();
+            EmotionOptions emotionOptions = new EmotionOptions.Builder().targets(targets).build();
 
-        Features features = new Features.Builder().emotion(emotionOptions).build();
+            features = new Features.Builder().emotion(emotionOptions).build();
 
-        AnalyzeOptions parameter = new AnalyzeOptions.Builder().text(textArticle).features(features).build();
+            AnalyzeOptions parameter = new AnalyzeOptions.Builder().text(textArticle).features(features).build();
 
-        AnalysisResults response = naturalLanguageUnderstanding.analyze(parameter).execute().getResult();
+            response = naturalLanguageUnderstanding.analyze(parameter).execute().getResult();
+        } else if (analyzeOption.equals("syntax")) {
+            SyntaxOptions syntaxOptions = new SyntaxOptions.Builder().sentences(true).build();
+            features = new Features.Builder().syntax(syntaxOptions).build();
+            AnalyzeOptions parameters = new AnalyzeOptions.Builder().text(textArticle).features(features)
+                    .build();
+            response = naturalLanguageUnderstanding.analyze(parameters).execute().getResult();
+
+        }
+
+
         return response;
     }
 
