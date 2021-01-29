@@ -1,23 +1,12 @@
-import Result.Result;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
+import Result.*;
 import com.ibm.watson.natural_language_understanding.v1.model.AnalysisResults;
-import com.sun.source.tree.AssertTree;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestResult {
     private Process process = new Process(new Text("Orange is lovely. It contains alot of vitamin C."), new
@@ -28,25 +17,46 @@ public class TestResult {
     @Test
     public void testResultContainsAnalysisResults() {
         process.setAnalyzeOption("emotion");
+        results = process.connectToWatson();
+        result = new Result(results);
         assertTrue(!result.getResult().toString().isEmpty());
     }
 
     @Test
     public void testResultContain1TargetEmotion() {
         process.setAnalyzeOption("emotion");
-        assertEquals(1, result.getEmotion().size());
+        results = process.connectToWatson();
+        result = new Result(results);
+        assertEquals(1, result.getEmotion());
     }
 
     @Test
     public void testResultContainJoyCorrectly() {
         process.setAnalyzeOption("emotion");
+        results = process.connectToWatson();
+        result = new Result(results);
         assertEquals(0.89565, result.getEmotion("orange", "joy"));
     }
 
     @Test
-    public void testResultContain9Result() {
+    public void testResultContainSyntaxes() {
+        Process process = new Process(new Text("with great power comes great responsibility"), new
+                DestinationEmail("listya.tapp@gmail.com"), new KeyPhrase("orange"));
         process.setAnalyzeOption("syntax");
-        assertEquals(9, result.getSyntax().size());
+        results = process.connectToWatson();
+        assertNotNull(results.toString());
+    }
+
+    @Test
+    public void testResultContain6Syntaxes() {
+        Process process = new Process(new Text("with great power comes great responsibility"), new
+                DestinationEmail("listya.tapp@gmail.com"), new KeyPhrase("orange"));
+        process.setAnalyzeOption("syntax");
+        results = process.connectToWatson();
+        Result result = new Result(results);
+        List<Syntax> syntaxes = result.getSyntax();
+        System.out.println(syntaxes.size());
+
     }
 
 }
