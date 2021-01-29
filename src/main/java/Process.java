@@ -64,7 +64,10 @@ public class Process {
 
             response = naturalLanguageUnderstanding.analyze(parameter).execute().getResult();
         } else if (analyzeOption.equals("syntax")) {
-            SyntaxOptions syntaxOptions = new SyntaxOptions.Builder().sentences(true).build();
+            SyntaxOptionsTokens syntaxOptionsTokens = new SyntaxOptionsTokens.Builder().partOfSpeech(true).lemma(true)
+                    .build();
+
+            SyntaxOptions syntaxOptions = new SyntaxOptions.Builder().tokens(syntaxOptionsTokens).sentences(true).build();
             features = new Features.Builder().syntax(syntaxOptions).build();
             AnalyzeOptions parameters = new AnalyzeOptions.Builder().text(textArticle).features(features)
                     .build();
