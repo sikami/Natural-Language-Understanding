@@ -71,7 +71,6 @@ public class Result {
         }
     }
     
-    
     public int getEmotion() {
         fillUpEmotionsWithResult();
         return emotions.size();

@@ -41,7 +41,7 @@ public class TestResult {
     @Test
     public void testResultContainSyntaxes() {
         Process process = new Process(new Text("with great power comes great responsibility"), new
-                DestinationEmail("listya.tapp@gmail.com"), new KeyPhrase("orange"));
+                DestinationEmail("listya.tapp@gmail.com"));
         process.setAnalyzeOption("syntax");
         results = process.connectToWatson();
         assertNotNull(results.toString());
@@ -50,7 +50,7 @@ public class TestResult {
     @Test
     public void testResultContain6Syntaxes() {
         Process process = new Process(new Text("with great power comes great responsibility"), new
-                DestinationEmail("listya.tapp@gmail.com"), new KeyPhrase("orange"));
+                DestinationEmail("listya.tapp@gmail.com"));
         process.setAnalyzeOption("syntax");
         results = process.connectToWatson();
         Result result = new Result(results);
