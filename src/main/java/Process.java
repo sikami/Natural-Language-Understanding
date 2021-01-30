@@ -1,11 +1,10 @@
 import PasswordReader.PasswordReader;
-import Result.Result;
+import Result.*;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.natural_language_understanding.v1.NaturalLanguageUnderstanding;
 import com.ibm.watson.natural_language_understanding.v1.model.*;
 import org.json.simple.parser.ParseException;
 import javax.mail.*;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
@@ -108,11 +107,26 @@ public class Process {
                 mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(destinationEmail.getDestinationEmail())) );
                 mimeMessage.setSubject("Your Natural Language Understanding result");
                 AnalysisResults results = connectToWatson();
-
                 Result result = new Result(results);
-                mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + result.printEmotion());
-                Transport.send(mimeMessage);
-                return true;
+                if (analyzeOption.equals("emotion")) {
+                    int resultsEmotion = result.getEmotion();
+                    if (resultsEmotion > 0) {
+                        mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + result.printEmotion());
+                        Transport.send(mimeMessage);
+                        return true;
+                    }
+
+                } else if (analyzeOption.equals("syntax")) {
+                    List<Syntax> resultSyntax = result.getSyntax();
+                    if (resultSyntax.size() > 0) {
+                        mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + result.printSyntax());
+                        Transport.send(mimeMessage);
+                        return true;
+                    }
+
+                }
+
+
             }
         } catch (ParseException | IOException | MessagingException e) {
             e.printStackTrace();

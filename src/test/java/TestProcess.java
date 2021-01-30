@@ -36,7 +36,15 @@ public class TestProcess {
     }
 
     @Test
-    public void testEmailCanBeSent() {
+    public void testEmailCanBeSentForEmotion() {
+        process.setAnalyzeOption("emotion");
+        assertTrue(process.sendEmail());
+    }
+
+    @Test
+    public void testEmailCanBeSentForSyntax() {
+        process = new Process(text,destinationEmail);
+        process.setAnalyzeOption("syntax");
         assertTrue(process.sendEmail());
     }
 
@@ -45,5 +53,4 @@ public class TestProcess {
         process.setAnalyzeOption("emotion");
         assertTrue(process.getAnalyzeOption().equals("emotion"));
     }
-
 }

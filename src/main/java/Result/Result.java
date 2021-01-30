@@ -66,7 +66,11 @@ public class Result {
         for (JsonElement jsonElements : jsonA) {
             word = jsonElements.getAsJsonObject().get("text").toString();
             partOfSpeech = jsonElements.getAsJsonObject().get("part_of_speech").toString();
-            lemma = jsonElements.getAsJsonObject().get("lemma").toString();
+            try {
+                lemma = jsonElements.getAsJsonObject().get("lemma").toString();
+            } catch (NullPointerException e) {
+                lemma = "n/a";
+            }
             syntaxes.add(new Syntax(word,partOfSpeech,lemma));
         }
     }
@@ -108,6 +112,12 @@ public class Result {
 
         emotions.forEach(stringBuilder::append);
 
+        return stringBuilder.toString();
+    }
+
+    public String printSyntax() {
+        StringBuilder stringBuilder = new StringBuilder();
+        syntaxes.forEach(stringBuilder::append);
         return stringBuilder.toString();
     }
 

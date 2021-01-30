@@ -55,7 +55,7 @@ public class TestResult {
         results = process.connectToWatson();
         Result result = new Result(results);
         List<Syntax> syntaxes = result.getSyntax();
-        syntaxes.forEach(System.out::println);
+        assertEquals(6, syntaxes.size());
     }
 
 }
