@@ -10,4 +10,8 @@ public class Syntax {
         this.partOfSpeech = partOfSpeech;
         this.lemma = lemma;
     }
+
+    public String toString() {
+        return "Word: " + word + "      | Part Of Speech: " + partOfSpeech + "      | Lemma: " + lemma;
+    }
 }

@@ -32,6 +32,13 @@ public class Process {
         this.analyzeOption = "";
     }
 
+    public Process(Text texts, DestinationEmail destinationEmail) {
+        this.texts = texts;
+        this.destinationEmail = destinationEmail;
+        this.passwordReader = new PasswordReader();
+        this.analyzeOption = "";
+    }
+
     public void setAnalyzeOption(String analyzeOption) {
         this.analyzeOption = analyzeOption;
     }
