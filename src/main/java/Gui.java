@@ -176,59 +176,74 @@ public class Gui extends Application {
 
             if(!checkIfTextFieldsAreEmpty()) {
                 button.setDisable(true);
-                process = new Process(textInput, new DestinationEmail(emailField.getText()),
-                        new KeyPhrase(keywords.getText()));
-
-                String option = toggleGroup.getSelectedToggle().toString().toLowerCase();
-                process.setAnalyzeOption(option);
-
-                // send connect to watson and send email to
-                process.sendEmail();
                 textArea.setDisable(true);
                 emailField.setDisable(true);
                 keywords.setDisable(true);
                 end.setText("Thank you. An email with the result will be sent to you shortly.");
+
+                RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
+                String option = selectedRadioButton.getText().toLowerCase();
+
+                if (option.equals("emotion")) {
+                    process = new Process(textInput, new DestinationEmail(emailField.getText()),
+                            new KeyPhrase(keywords.getText()));
+                } else if (option.equals("syntax")) {
+                    process = new Process(textInput, new DestinationEmail(emailField.getText()));
+                }
+                process.setAnalyzeOption(option);
+
+                // send connect to watson and send email to
+                boolean sent = process.sendEmail();
+                if (sent) {
+                    System.out.println("Email sent.");
+                } else {
+                    System.out.println("Email is not sent.");
+                }
             }
         });
     }
 
     private boolean checkIfTextFieldsAreEmpty() {
         //check if pathName is empty, when its empty check text area etc
-        if (pathName.getText().isEmpty()) {
-            textArea.setDisable(false);
-            if (textArea.getText().isEmpty() && emailField.getText().isEmpty() && keywords.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!") &&
-                    emailField.getText().equals("This field cannot be empty!") && keywords.getText().equals("This field cannot be empty!")) {
-                warning(textArea);
-                warning(emailField);
-                warning(keywords);
-                return true;
-            } else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
-                warning(emailField);
-                return true;
-            } else if (textArea.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!")) {
-                warning(textArea);
-                return true;
-            } else if (keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
-                warning(keywords);
-                return true;
-            }
-        } else {
-            //if pathName is not empty, then textArea set disabled, then check if keywords is empty and email address is empty
-            textArea.setDisable(true);
-            textArea.setText("");
-            if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!") && keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
-                warning(emailField);
-                warning(keywords);
-                return true;
-            }
-            else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
-                warning(emailField);
-                return true;
-            } else if (keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
-                warning(keywords);
-                return true;
+        String option = toggleGroup.getSelectedToggle().toString().toLowerCase();
+        if (option.equals("emotion")) {
+            if (pathName.getText().isEmpty()) {
+                textArea.setDisable(false);
+                if (textArea.getText().isEmpty() && emailField.getText().isEmpty() && keywords.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!") &&
+                        emailField.getText().equals("This field cannot be empty!") && keywords.getText().equals("This field cannot be empty!")) {
+                    warning(textArea);
+                    warning(emailField);
+                    warning(keywords);
+                    return true;
+                } else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
+                    warning(emailField);
+                    return true;
+                } else if (textArea.getText().isEmpty() || textArea.getText().equals("This field cannot be empty!")) {
+                    warning(textArea);
+                    return true;
+                } else if (keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
+                    warning(keywords);
+                    return true;
+                }
+            } else {
+                //if pathName is not empty, then textArea set disabled, then check if keywords is empty and email address is empty
+                textArea.setDisable(true);
+                textArea.setText("");
+                if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!") && keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
+                    warning(emailField);
+                    warning(keywords);
+                    return true;
+                }
+                else if (emailField.getText().isEmpty() || emailField.getText().equals("This field cannot be empty!")) {
+                    warning(emailField);
+                    return true;
+                } else if (keywords.getText().isEmpty() || keywords.getText().equals("This field cannot be empty!")) {
+                    warning(keywords);
+                    return true;
+                }
             }
         }
+
         return false;
     }
 
