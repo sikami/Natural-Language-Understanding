@@ -199,6 +199,8 @@ public class Gui extends Application {
                 } else {
                     System.out.println("Email is not sent.");
                 }
+
+                System.exit(1);
             }
         });
     }
