@@ -12,6 +12,6 @@ public class Syntax {
     }
 
     public String toString() {
-        return "Word: " + word + " | Part Of Speech: " + partOfSpeech + " | Lemma: " + lemma;
+        return "Word: " + word + "      | Part Of Speech: " + partOfSpeech + "      | Lemma: " + lemma;
     }
 }

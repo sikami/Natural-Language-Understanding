@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestResult {
     private Process process = new Process(new Text("Orange is lovely. It contains alot of vitamin C."), new
-            DestinationEmail("listya.tapp@gmail.com"), new KeyPhrase("orange"));
+            DestinationEmail("haha@gmail.com"), new KeyPhrase("orange"));
     private AnalysisResults results = process.connectToWatson();
     private Result result = new Result(results);
 
@@ -41,7 +41,7 @@ public class TestResult {
     @Test
     public void testResultContainSyntaxes() {
         Process process = new Process(new Text("with great power comes great responsibility"), new
-                DestinationEmail("listya.tapp@gmail.com"));
+                DestinationEmail("haha@gmail.com"));
         process.setAnalyzeOption("syntax");
         results = process.connectToWatson();
         assertNotNull(results.toString());
@@ -50,13 +50,12 @@ public class TestResult {
     @Test
     public void testResultContain6Syntaxes() {
         Process process = new Process(new Text("with great power comes great responsibility"), new
-                DestinationEmail("listya.tapp@gmail.com"));
+                DestinationEmail("haha@gmail.com"));
         process.setAnalyzeOption("syntax");
         results = process.connectToWatson();
         Result result = new Result(results);
         List<Syntax> syntaxes = result.getSyntax();
-        System.out.println(syntaxes.size());
-
+        syntaxes.forEach(System.out::println);
     }
 
 }
