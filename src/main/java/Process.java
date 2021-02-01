@@ -126,10 +126,7 @@ public class Process {
                         Transport.send(mimeMessage);
                         return true;
                     }
-
                 }
-
-
             }
         } catch (ParseException | IOException | MessagingException e) {
             e.printStackTrace();
@@ -146,10 +143,10 @@ public class Process {
             stringBuilder.append(String.format("%20s %30s %30s \n", syntax.getWord(), syntax.getPartOfSpeech(), syntax.getLemma()));
             stringBuilder.append("-------------------------------------------------------------------------------------------------------------------\n");
         }
-        createFile(stringBuilder.toString());
         return stringBuilder.toString();
     }
 
+    //this function is for Testing purposes only
     public int printSyntaxInTableFormat() throws IOException {
         AnalysisResults results = connectToWatson();
         Result result = new Result(results);
@@ -166,6 +163,7 @@ public class Process {
         return 0;
     }
 
+    //this function is for Testing purposes only
     private void createFile(String result) throws IOException {
         File test = new File("syntaxResult.txt");
         FileWriter writer = new FileWriter(test);
