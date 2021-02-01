@@ -21,7 +21,6 @@ Mailbox API. Main class is the launcher, while the process of analyzing the text
 <h3>Future advancement</h3>
 <ul>
 <li>Email sent for Syntax result is set in a tidy table so its readable, right now its only String</li>
-<li>GUI has option to show result on it instead of email</li>
 <li>Convert project to Web App project with Spring Boot</li>
 </ul>
 
