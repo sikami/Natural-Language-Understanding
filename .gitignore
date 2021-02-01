@@ -3,3 +3,4 @@ NaturalLanguageUnderstanding.iml
 target/
 config
 free.java
+syntaxResult.txt

@@ -4,6 +4,8 @@ import org.json.simple.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestProcess {
@@ -52,5 +54,12 @@ public class TestProcess {
     public void testProcessGivesAnalyzeOption() {
         process.setAnalyzeOption("emotion");
         assertTrue(process.getAnalyzeOption().equals("emotion"));
+    }
+
+    @Test
+    public void testProcessPrintOutSyntaxInATableAndPrintItOutInAFile() throws IOException {
+        process = new Process(text,destinationEmail);
+        process.setAnalyzeOption("syntax");
+        assertEquals(0, process.printSyntaxInTableFormat());
     }
 }

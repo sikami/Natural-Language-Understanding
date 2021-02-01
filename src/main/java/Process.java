@@ -7,6 +7,8 @@ import org.json.simple.parser.ParseException;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -119,7 +121,8 @@ public class Process {
                 } else if (analyzeOption.equals("syntax")) {
                     List<Syntax> resultSyntax = result.getSyntax();
                     if (resultSyntax.size() > 0) {
-                        mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + result.printSyntax());
+                        String resultString = printSyntaxInTableFormat(resultSyntax);
+                        mimeMessage.setText("Your Text:\n\n" + texts.getText() + "\n\nYour result:\n\n" + resultString);
                         Transport.send(mimeMessage);
                         return true;
                     }
@@ -132,5 +135,41 @@ public class Process {
             e.printStackTrace();
         }
         return false;
+    }
+
+    private String printSyntaxInTableFormat(List<Syntax> result) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("===============================================================\n");
+        stringBuilder.append(String.format("%20s %20s %20s \n", "WORD", "PART OF SPEECH", "LEMMA"));
+        stringBuilder.append("===============================================================\n\n");
+        for (Syntax syntax : result) {
+            stringBuilder.append(String.format("%20s %30s %30s \n", syntax.getWord(), syntax.getPartOfSpeech(), syntax.getLemma()));
+            stringBuilder.append("-------------------------------------------------------------------------------------------------------------------\n");
+        }
+        createFile(stringBuilder.toString());
+        return stringBuilder.toString();
+    }
+
+    public int printSyntaxInTableFormat() throws IOException {
+        AnalysisResults results = connectToWatson();
+        Result result = new Result(results);
+        List<Syntax> resultSyntax = result.getSyntax();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("===============================================================\n");
+        stringBuilder.append(String.format("%20s %20s %20s \n", "WORD", "PART OF SPEECH", "LEMMA"));
+        stringBuilder.append("===============================================================\n\n");
+        for (Syntax syntax : resultSyntax) {
+            stringBuilder.append(String.format("%20s %20s %20s \n", syntax.getWord(), syntax.getPartOfSpeech(), syntax.getLemma()));
+            stringBuilder.append("---------------------------------------------------------------\n");
+        }
+        createFile(stringBuilder.toString());
+        return 0;
+    }
+
+    private void createFile(String result) throws IOException {
+        File test = new File("syntaxResult.txt");
+        FileWriter writer = new FileWriter(test);
+        writer.write(result);
+        writer.close();
     }
 }

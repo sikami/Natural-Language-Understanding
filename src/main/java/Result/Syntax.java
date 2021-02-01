@@ -11,6 +11,18 @@ public class Syntax {
         this.lemma = lemma;
     }
 
+    public String getWord() {
+        return word;
+    }
+
+    public String getPartOfSpeech() {
+        return partOfSpeech;
+    }
+
+    public String getLemma() {
+        return lemma;
+    }
+
     public String toString() {
         return "Word: " + word + "      | Part Of Speech: " + partOfSpeech + "      | Lemma: " + lemma + "\n\n";
     }
